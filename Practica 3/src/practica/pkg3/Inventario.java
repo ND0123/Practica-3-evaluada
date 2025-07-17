@@ -16,18 +16,16 @@ public class Inventario {
     private int totalProductos;
     private Empleado empleado;
     private Super supermercado;
-    
-    
+    private int maxProductos;
 
-    public Inventario() {
+    
+    public Inventario(Empleado empleado, Super supermercado, int maxProductos) {
+        this.empleado = empleado;
+        this.supermercado = supermercado;
+        this.maxProductos = maxProductos;
+        productos = new Producto[maxProductos];
+        totalProductos = 0;
     }
-
-        public Inventario(Producto[] productos, int totalProductos, Empleado empleado, Super supermercado) {
-            this.productos = productos;
-            this.totalProductos = totalProductos;
-            this.empleado = empleado;
-            this.supermercado = supermercado;
-        }
 
     public Producto[] getProductos() {
         return productos;
@@ -61,27 +59,69 @@ public class Inventario {
         this.supermercado = supermercado;
     }
 
-    //Se utilizara en el main para verse mas limpio al solo llamarlo 
+    // Con esto solo lo llamamos en el main para que se vea mas limpio
     public void mostrarProductos() {
         for (int i = 0; i < totalProductos; i++) {
-            JOptionPane.showMessageDialog(null, "Producto: " + productos[i].getNombreProducto() + "con el codigo: " + productos[i].getCodigoProducto() + "tipo de producto: " + productos[i].getTipoProducto() + "Con un precio base de: " + productos[i].getPrecioBase() + "Y un precio bruto de: " + productos[i].getPrecioBruto() + "Teniendo una ganancia de: " + productos[i].getGanancia());
-            
-
+            Producto p = productos[i];
+            JOptionPane.showMessageDialog(null,
+                    "Producto: " + p.getNombreProducto() + 
+                    "\nCódigo: " + p.getCodigoProducto() + 
+                    "\nTipo: " + p.getTipoProducto() + 
+                    "\nPrecio base: " + p.getPrecioBase() + 
+                    "\nPrecio bruto: " + p.getPrecioBruto() + 
+                    "\nGanancia: " + p.getGanancia());
         }
     }
-// Y este para calcular la ganancia total
-    public double calcularGananciaTotal(){
-        double total= 0;
+
+    // Calcular la ganancia total 
+    public double calcularGananciaTotal() {
+        double total = 0;
         for (int i = 0; i < totalProductos; i++) {
             total += productos[i].getGanancia();
-            
-            
         }
         return total;
     }
-    public void agregarProductos(){
-        String lista= new lista();
-        
+
+    
+    public void agregarProductos(Producto p) {
+        if (totalProductos < productos.length) {
+            productos[totalProductos] = p;
+            totalProductos++;
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pueden agregar más productos");
+        }
+    }
+
+    
+    public void cargarProductos() {
+        String seguir = "s";
+
+        while (seguir.equalsIgnoreCase("s") && totalProductos < productos.length) {
+            String codigo = JOptionPane.showInputDialog("Ingrese código del producto:");
+            if (codigo == null || codigo.equals("")) break;
+
+            String nombre = JOptionPane.showInputDialog("Ingrese nombre del producto:");
+            if (nombre == null || nombre.equals("")) break;
+
+            String textoCantidad = JOptionPane.showInputDialog("Ingrese cantidad:");
+            if (textoCantidad == null || textoCantidad.equals("")) break;
+            int cantidad = Integer.parseInt(textoCantidad);
+
+            String textoPrecio = JOptionPane.showInputDialog("Ingrese precio base:");
+            if (textoPrecio == null || textoPrecio.equals("")) break;
+            int precioBase = Integer.parseInt(textoPrecio);
+
+            String tipo = JOptionPane.showInputDialog("Ingrese tipo de producto (Alimentos, Bebidas, Higiene, Limpieza):");
+            if (tipo == null || tipo.equals("")) break;
+
+            Producto p = new Producto(nombre, codigo, tipo, precioBase, cantidad);
+            p.calcularPrecioBruto();
+            p.calcularGanancia(cantidad);
+            agregarProductos(p);
+
+            seguir = JOptionPane.showInputDialog("¿Desea agregar otro producto? (s/n):");
+            if (seguir == null) break;
+        }
     }
     
     @Override

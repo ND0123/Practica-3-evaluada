@@ -9,24 +9,28 @@ package practica.pkg3;
  * @author Laboratorio
  */
 public class Producto {
-private String nombreProducto;
-private String codigoProducto;
-private String tipoProducto;
-private int precioBase;
-private double precioBruto;
-private double ganancia;
 
-    public Producto() {
-    }
+    private String nombreProducto;
+    private String codigoProducto;
+    private String tipoProducto;
+    private int precioBase;
+    private double precioBruto;
+    private double ganancia;
+    private int cantidad;
 
-    public Producto(String nombreProducto, String codigoProducto, String tipoProducto, int precioBase, double precioBruto, double ganancia) {
+    public Producto(String nombreProducto, String codigoProducto, String tipoProducto, int precioBase, int cantidad) {
         this.nombreProducto = nombreProducto;
         this.codigoProducto = codigoProducto;
         this.tipoProducto = tipoProducto;
         this.precioBase = precioBase;
-        this.precioBruto = precioBruto;
-        this.ganancia = ganancia;
+        this.cantidad = cantidad;
+        
     }
+
+    public Producto() {
+    }
+
+    
 
     public String getNombreProducto() {
         return nombreProducto;
@@ -76,35 +80,44 @@ private double ganancia;
         this.ganancia = ganancia;
     }
 
-    public void calcularPrecioBruto(){ //Metodo para calcular el precio bruto dependiendo de los productos
-        switch(tipoProducto.toLowerCase()){
-            case "alimentos":
-                precioBruto = precioBase * 0.20;
-                break;
-            case "bebidas":
-                precioBruto = precioBase * 0.30;
-                break;
-            case "higiene":
-                precioBruto = precioBase * 0.25 + 500;
-                break;
-            case "limpieza":
-                precioBruto = precioBase * 0.19 + precioBase * 0.04 + 1000 + precioBase;
-                break;
-                default:
-                    precioBruto = precioBase; //Si llega a ser invalido
-                        
-        }
-                
-    }
-    //Calcular ganancia
-    public void calcularGanancia(double cantidad){
-        ganancia = (precioBruto-precioBase)*cantidad;
-    
-    }
-    @Override
-    public String toString() {
-        return "Producto{" + "nombreProducto=" + nombreProducto + ", codigoProducto=" + codigoProducto + ", tipoProducto=" + tipoProducto + ", precioBase=" + precioBase + ", precioBruto=" + precioBruto + ", ganancia=" + ganancia + '}';
+    public int getCantidad() {
+        return cantidad;
     }
 
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public void calcularPrecioBruto() { //Metodo para calcular el precio bruto dependiendo de los productos
+        switch (tipoProducto.toLowerCase()) {
+            case "alimentos":
+                precioBruto = precioBase * 1.20;
+                break;
+            case "bebidas":
+                precioBruto = precioBase * 1.30;
+                break;
+            case "higiene":
+                precioBruto = precioBase * 1.25 + 500;
+                break;
+            case "limpieza":
+                precioBruto = precioBase * 1.19 + precioBase * 0.04 + 1000;
+                break;
+            default:
+                precioBruto = precioBase; //Si llega a ser invalido
+
+        }
+
+    }
+
+    //Calcular ganancia
+    public void calcularGanancia(double cantidad) {
+        ganancia = (precioBruto - precioBase) * cantidad;
+
+    }
+
+    @Override
+    public String toString() {
+        return "Producto{" + "nombreProducto=" + nombreProducto + ", codigoProducto=" + codigoProducto + ", tipoProducto=" + tipoProducto + ", precioBase=" + precioBase + ", precioBruto=" + precioBruto + ", ganancia=" + ganancia + ", cantidad=" + cantidad + '}';
+    }
 
 }

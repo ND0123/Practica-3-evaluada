@@ -9,29 +9,34 @@ package practica.pkg3;
  * @author Laboratorio
  */
 public class Super {
-private String nombre;
-private String codigo;
+private String nombreSuper;
+private String codigoSuper;
 
-    public Super(String nombre, String codigo) {
-        this.nombre = nombre;
-        this.codigo = codigo;
+    public Super(String nombreSuper, String codigoSuper) {
+        this.nombreSuper = nombreSuper;
+        this.codigoSuper = codigoSuper;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreSuper() {
+        return nombreSuper;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreSuper(String nombreSuper) {
+        this.nombreSuper = nombreSuper;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public String getCodigoSuper() {
+        return codigoSuper;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setCodigoSuper(String codigoSuper) {
+        this.codigoSuper = codigoSuper;
     }
+
+    
 
 
 }
+    
+    
+    

@@ -9,29 +9,31 @@ package practica.pkg3;
  * @author Laboratorio
  */
 public class Empleado {
-private String nombre;
-private String cedula;
+private String nombreEmpleado;
+private String cedulaEmpleado;
 
-    public Empleado(String nombre, String cedula) {
-        this.nombre = nombre;
-        this.cedula = cedula;
+    public Empleado(String nombreEmpleado, String cedulaEmpleado) {
+        this.nombreEmpleado = nombreEmpleado;
+        this.cedulaEmpleado = cedulaEmpleado;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreEmpleado() {
+        return nombreEmpleado;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreEmpleado(String nombreEmpleado) {
+        this.nombreEmpleado = nombreEmpleado;
     }
 
-    public String getCedula() {
-        return cedula;
+    public String getCedulaEmpleado() {
+        return cedulaEmpleado;
     }
 
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
+    public void setCedulaEmpleado(String cedulaEmpleado) {
+        this.cedulaEmpleado = cedulaEmpleado;
     }
+
+   
 
 
 }
